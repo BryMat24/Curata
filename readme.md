@@ -10,6 +10,4 @@ A Generative AI (GenAI) Course Builder and Summariser that allows students to cu
 -   **Back-End:** Express.js, Sequelize
 -   **Data:** PostgreSQL, PineconeDB
 
-You can access a demo video of the application [here](https://drive.google.com/file/d/1XzsNnfFu_IQkG4_eF3zAWpyNQ7AFglfD/view?usp=sharing).
-
 ![Example Image](./architecture.png)
