@@ -13,6 +13,7 @@ export const ThemeProvider: FC<{ children: ReactNode }> = ({ children }) => {
 
     const toggleTheme = (theme: string) => {
         setTheme(theme === "light" ? "dark" : "light");
+        document.body.classList.toggle("dark");
     };
 
     return (

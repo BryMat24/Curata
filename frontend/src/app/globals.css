@@ -75,20 +75,34 @@
     }
 }
 
-.animated-background {
-    background: linear-gradient(90deg, #cfecd0, #ffc5ca);
-    animation: gradient 5s ease infinite;
+@layer components {
+    .animated-background {
+        background: linear-gradient(90deg, #cfecd0, #ffc5ca);
+        animation: gradient 5s ease infinite;
+    }
+
+    @keyframes gradient {
+        0% {
+            background-position: 0% 50%;
+        }
+        50% {
+            background-position: 100% 50%;
+        }
+        100% {
+            background-position: 0% 50%;
+        }
+    }
 }
 
-@keyframes gradient {
-    0% {
-        background-position: 0% 50%;
+@layer utilities {
+    /* Chrome, Safari and Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
     }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
+
+    .no-scrollbar {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
     }
 }
 

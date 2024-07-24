@@ -12,7 +12,7 @@ interface Props {}
 
 const Menu: FunctionComponent<Props> = () => {
     return (
-        <div className="flex justify-center">
+        <div className="absolute left-[50%] translate-x-[-50%]">
             <Menubar>
                 <MenubarMenu>
                     <MenubarTrigger>

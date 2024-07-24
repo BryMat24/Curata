@@ -3,13 +3,19 @@ import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import { Menubar, MenubarMenu, MenubarTrigger } from "@/components/ui/menubar";
 import Image from "next/image";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { ThemeContext } from "@/context/themeContext";
 
 export default function Home() {
     const [selectedMenu, setSelectedMenu] = useState("coursegen");
+    const { theme } = useContext(ThemeContext);
 
     return (
-        <main className="animated-background">
+        <main
+            className={`${
+                theme === "light" ? "animated-background" : ""
+            } dark:bg-black`}
+        >
             <div className="min-h-screen flex flex-col items-center justify-center gap-5">
                 <h1 className="text-5xl font-bold">Curata 🤖.</h1>
                 <p className="text-2xl">

@@ -1,8 +1,8 @@
 import { FunctionComponent, useMemo, useState } from "react";
 import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Chapter } from "@/types";
 import { Button } from "./ui/button";
+import { Chapter } from "@/types/course";
 
 interface QuizProps {
     chapter: Chapter | null;
@@ -67,13 +67,17 @@ const QuizSection: FunctionComponent<QuizProps> = ({ chapter }) => {
                         >
                             {question?.Options?.map((option, index) => (
                                 <div
-                                    className="flex items-center space-x-2 mt-1"
                                     key={index}
+                                    className="flex space-x-2 mt-1"
                                 >
-                                    <RadioGroupItem
-                                        value={index + ""}
-                                        id={question.id + index.toString()}
-                                    />
+                                    <div>
+                                        <RadioGroupItem
+                                            value={index + ""}
+                                            id={question.id + index.toString()}
+                                            className="w-[12px] h-[12px]"
+                                        />
+                                    </div>
+
                                     <Label
                                         htmlFor="option-one"
                                         className="text-[15px] leading-4"
@@ -86,7 +90,11 @@ const QuizSection: FunctionComponent<QuizProps> = ({ chapter }) => {
                     </div>
                 ))}
             </div>
-            <Button className="mt-2 w-full" size="lg" onClick={checkAnswer}>
+            <Button
+                className="mt-2 w-full dark:bg-dark-blue dark:text-green-500"
+                size="lg"
+                onClick={checkAnswer}
+            >
                 Check Answer
             </Button>
         </div>

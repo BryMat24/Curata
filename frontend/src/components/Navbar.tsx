@@ -13,7 +13,7 @@ export const Navbar = () => {
     };
 
     return (
-        <div className="absolute left-0 right-0 flex justify-between p-5 -z-10">
+        <div className="absolute left-0 right-0 flex justify-between p-5">
             <div>
                 <img
                     alt="favicon"

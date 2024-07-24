@@ -48,7 +48,7 @@ const CourseDetail: FunctionComponent<Props> = () => {
                 course={course || null}
                 currentChapterId={chapter?.id || null}
             />
-            <div className="my-2 flex ml-[400px] pl-8 pt-12 mr-5">
+            <div className="my-2 flex ml-[350px] pl-8 pt-12 mr-5">
                 <MainVideoSummary
                     chapter={chapter as Chapter}
                     chapterIndex={chapterIndex}
@@ -60,7 +60,7 @@ const CourseDetail: FunctionComponent<Props> = () => {
                 </div>
             </div>
 
-            <div className="mt-5 h-[1px] flex-[1] bg-gray-500 text-gray-500 ml-[430px] mr-5" />
+            <div className="mt-5 h-[1px] flex-[1] bg-gray-500 text-gray-500 ml-[400px] mr-5" />
             <div className="flex pb-8 ml-[400px] px-5">
                 {prevChapter && (
                     <Link
