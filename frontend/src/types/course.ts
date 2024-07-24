@@ -1,32 +1,32 @@
-export interface Course {
+export type Course = {
     id: number;
     courseName: string;
     Units: Array<Unit>;
     loading: false;
-}
+};
 
-export interface Unit {
+export type Unit = {
     unitName: string;
     Chapters: Array<Chapter>;
     id: number;
-}
+};
 
-export interface Chapter {
+export type Chapter = {
     chapterName: string;
     id: number;
     videoId: string;
     videoTranscript: string;
     Questions: Array<Question>;
-}
+};
 
-export interface Question {
+export type Question = {
     question: string;
     Options: Array<Option>;
     id: number;
-}
+};
 
-export interface Option {
+export type Option = {
     id: number;
     option: string;
     status: boolean;
-}
+};

@@ -7,7 +7,7 @@ import MainVideoSummary from "@/components/MainVideoSummary";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import QuizSection from "@/components/QuizSection";
-import { Unit, Course, Chapter } from "@/types";
+import { Unit, Course, Chapter } from "@/types/course";
 
 interface Props {}
 

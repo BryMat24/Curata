@@ -5,6 +5,8 @@ import Note from "@/components/Note";
 import "./globals.css";
 import Menu from "@/components/Menu";
 import { Toaster } from "@/components/ui/toaster";
+import { Navbar } from "@/components/Navbar";
+import { ThemeProvider } from "@/context/themeContext";
 
 export const fontSans = FontSans({
     subsets: ["latin"],
@@ -32,10 +34,12 @@ export default function RootLayout({
                     fontSans.variable
                 )}
             >
-                <Menu />
-                {children}
-                <Note />
-                <Toaster />
+                <ThemeProvider>
+                    <Navbar />
+                    {children}
+                    <Note />
+                    <Toaster />
+                </ThemeProvider>
             </body>
         </html>
     );

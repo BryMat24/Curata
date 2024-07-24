@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { apiClient } from "@/lib/axios";
 import { MoonLoader } from "react-spinners";
 import QuizSection from "@/components/QuizSection";
-import { Chapter } from "@/types";
+import { Chapter } from "@/types/summary";
 
 interface Props {}
 

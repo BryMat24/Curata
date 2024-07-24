@@ -78,7 +78,6 @@
 .animated-background {
     background: linear-gradient(90deg, #cfecd0, #ffc5ca);
     animation: gradient 5s ease infinite;
-    height: 100vh;
 }
 
 @keyframes gradient {

@@ -8,24 +8,7 @@ import { apiClient } from "@/lib/axios";
 import { useParams } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
-
-interface Course {
-    id: number;
-    courseName: string;
-    Units: Array<Unit>;
-    loading: false;
-}
-
-interface Unit {
-    unitName: string;
-    Chapters: Array<Chapter>;
-    id: number;
-}
-
-interface Chapter {
-    chapterName: string;
-    id: number;
-}
+import { Course } from "@/types/course";
 
 interface Props {}
 
