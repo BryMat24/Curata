@@ -3,6 +3,7 @@ export type Course = {
     courseName: string;
     Units: Array<Unit>;
     loading: false;
+    courseImage: string;
 };
 
 export type Unit = {

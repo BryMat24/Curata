@@ -6,13 +6,14 @@ import { Input } from "@/components/ui/input";
 import { apiClient } from "@/lib/axios";
 import { MoonLoader } from "react-spinners";
 import QuizSection from "@/components/QuizSection";
-import { Chapter } from "@/types/summary";
+import { Summary, Question } from "@/types/summary";
+import { Chapter } from "@/types/course";
 
 interface Props {}
 
 const Summarize: FunctionComponent<Props> = () => {
-    const [summary, setSummary] = useState();
-    const [question, setQuestion] = useState();
+    const [summary, setSummary] = useState<Summary>();
+    const [question, setQuestion] = useState<Question>();
     const [loading, setLoading] = useState({ status: false, text: "" });
 
     const handleUpload = async (e: any) => {
@@ -66,7 +67,7 @@ const Summarize: FunctionComponent<Props> = () => {
 
     const chapter = {
         Questions: question
-            ? Object.entries(question?.data).map(([question, options]) => ({
+            ? Object.entries(question).map(([question, options]) => ({
                   question,
                   Options: options.map(({ option, status }) => ({
                       option,
@@ -85,14 +86,12 @@ const Summarize: FunctionComponent<Props> = () => {
                 <h1 className="px-4 pt-4 text-3xl font-bold">
                     AI Generated Summary
                 </h1>
-                {Object.entries(summary?.data).map(
-                    ([title, content], index) => (
-                        <div className="p-6 py-4" key={index}>
-                            <h1 className="mb-2 text-xl font-bold">{title}</h1>
-                            <p>{content}</p>
-                        </div>
-                    )
-                )}
+                {Object.entries(summary).map(([title, content], index) => (
+                    <div className="p-6 py-4" key={index}>
+                        <h1 className="mb-2 text-xl font-bold">{title}</h1>
+                        <p>{content}</p>
+                    </div>
+                ))}
             </div>
             <div className="h-[80vh] overflow-y-scroll" style={{ flex: "30%" }}>
                 <QuizSection chapter={chapter as Chapter} />

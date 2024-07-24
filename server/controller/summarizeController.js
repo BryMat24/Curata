@@ -66,8 +66,6 @@ class Summarize {
                     includeMetadata: true,
                 });
 
-                console.log(randomQueryResponse?.matches[0]?.metadata?.content);
-
                 const headline = await openai.chat.completions.create({
                     messages: [
                         {
@@ -117,7 +115,7 @@ class Summarize {
                 summaryResponse[headline] = sectionSummary.choices[0]?.message.content;
             }
 
-            res.status(200).json({ message: "success", data: summaryResponse });
+            res.status(200).json(summaryResponse);
         } catch (err) {
             next(err);
         }
@@ -197,7 +195,7 @@ class Summarize {
                 questionResponse[generatedQuestion] = options;
             }
 
-            res.status(200).json({ message: "success", data: questionResponse });
+            res.status(200).json(questionResponse);
         } catch (err) {
             next(err);
         }

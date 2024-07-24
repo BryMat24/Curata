@@ -8,27 +8,18 @@ import Link from "next/link";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import QuizSection from "@/components/QuizSection";
 import { Unit, Course, Chapter } from "@/types/course";
+import { useFetch } from "@/hooks/useFetch";
 
 interface Props {}
 
 const CourseDetail: FunctionComponent<Props> = () => {
-    const [course, setCourses] = useState<Course>();
     const { slug } = useParams();
     const [courseId, unitIndexParam, chapterIndexParam] = slug;
-    const [loading, setLoading] = useState(false);
-
-    useEffect(() => {
-        getCourses();
-    }, []);
-
-    const getCourses = async () => {
-        try {
-            const { data } = await apiClient.get<Course>(`/course/${courseId}`);
-            setCourses(data);
-        } catch (err) {
-            console.log(err);
-        }
-    };
+    const {
+        data: course,
+        error,
+        loading,
+    } = useFetch<Course>(`/course/${courseId}`);
 
     if (!unitIndexParam || !chapterIndexParam) {
         return <>Something went wrong</>;

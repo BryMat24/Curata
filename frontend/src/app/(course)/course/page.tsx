@@ -1,47 +1,20 @@
 "use client";
-import { FunctionComponent, useEffect, useState } from "react";
+import { FC } from "react";
 import CourseCard from "@/components/CourseCard";
 import Link from "next/link";
 import { Card } from "@/components/ui/card";
 import { Plus } from "lucide-react";
-import { apiClient } from "@/lib/axios";
-import { useToast } from "@/components/ui/use-toast";
+import { Course } from "@/types/course";
+import { useFetch } from "@/hooks/useFetch";
 
 interface Props {}
 
-interface Course {
-    courseImage: string;
-    courseName: string;
-    Units: Unit[];
-    id: number;
-}
-
-interface Unit {
-    unitName: string;
-}
-
-const Course: FunctionComponent<Props> = () => {
-    const [courses, setCourses] = useState<Array<Course>>([]);
-    const [loading, setLoading] = useState(false);
-    const { toast } = useToast();
-
-    useEffect(() => {
-        getAllCourses();
-    }, []);
-
-    const getAllCourses = async () => {
-        try {
-            setLoading(true);
-            const { data } = await apiClient("/course");
-            setCourses(data);
-            setLoading(false);
-        } catch (err) {
-            toast({
-                title: "Error occured!",
-                description: `${err}`,
-            });
-        }
-    };
+const Course: FC<Props> = () => {
+    const {
+        data: courses,
+        loading,
+        error,
+    } = useFetch<Array<Course>>("/course");
 
     return (
         <div className="py-28 px-24 flex flex-wrap gap-5 justify-center">
@@ -50,7 +23,7 @@ const Course: FunctionComponent<Props> = () => {
                     <Plus className="h-10 w-10" />
                 </Card>
             </Link>
-            {courses.map((course, index) => (
+            {courses?.map((course, index) => (
                 <Link href={`/course/${course?.id}/0/0`} key={index}>
                     <CourseCard
                         courseImage={course?.courseImage}
