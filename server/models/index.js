@@ -11,7 +11,10 @@ const db = {};
 
 let sequelize;
 if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
+  sequelize = new Sequelize('postgres.unknvwxivzqizsgqydwt', 'xiSzHjsQZ3w8De9h', 'postgres', {
+    dialect: 'postgres',
+    host: 'aws-0-ap-southeast-1.pooler.supabase.com',
+  });
 } else {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }

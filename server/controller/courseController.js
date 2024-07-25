@@ -135,7 +135,6 @@ class CourseController {
             const { thumbnails, title } = videoResult.items[0].snippet;
             const { videoId } = videoResult.items[0].id;
 
-            // generate transcript
             const transcript = (await YoutubeTranscript.fetchTranscript(videoId, {
                 lang: "en",
                 country: "EN",

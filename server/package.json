@@ -25,7 +25,7 @@
         "sequelize": "^6.36.0",
         "split-text": "^1.0.0",
         "uuid": "^9.0.1",
-        "youtube-transcript": "^1.0.6"
+        "youtube-transcript": "^1.2.1"
     },
     "devDependencies": {
         "nodemon": "^3.0.3"
