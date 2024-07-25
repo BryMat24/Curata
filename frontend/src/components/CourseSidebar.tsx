@@ -17,14 +17,14 @@ const CourseSidebar: FunctionComponent<CourseSidebarProps> = ({
     return (
         <div className="absolute min-h-screen w-[350px] overflow-y-scroll rounded-md bg-[#F5F5F4] p-6 mt-[80px] dark:bg-black no-scrollbar">
             <h1 className="text-4xl font-bold">{course?.courseName}</h1>
-            {course?.Units?.map((unit, unitIndex) => {
+            {course?.units?.map((unit, unitIndex) => {
                 return (
                     <div key={unit.id} className="mt-4">
                         <h2 className="text-sm uppercase text-secondary-foreground/60">
                             Unit {unitIndex + 1}
                         </h2>
                         <h2 className="text-2xl font-bold">{unit?.unitName}</h2>
-                        {unit.Chapters.map((chapter, chapterIndex) => {
+                        {unit.chapters.map((chapter, chapterIndex) => {
                             return (
                                 <div key={chapter.id}>
                                     <Link

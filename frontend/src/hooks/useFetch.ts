@@ -6,6 +6,7 @@ interface UseFetchReturnType<T> {
     data: T | null;
     loading: boolean;
     error: Error | null;
+    setLoading: Function;
 }
 
 export const useFetch = <T>(url: string): UseFetchReturnType<T> => {
@@ -35,5 +36,5 @@ export const useFetch = <T>(url: string): UseFetchReturnType<T> => {
             });
     }, [url]);
 
-    return { data, loading, error };
+    return { data, loading, error, setLoading };
 };

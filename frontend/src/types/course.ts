@@ -1,14 +1,14 @@
 export type Course = {
     id: number;
     courseName: string;
-    Units: Array<Unit>;
+    units: Array<Unit>;
     loading: false;
     courseImage: string;
 };
 
 export type Unit = {
     unitName: string;
-    Chapters: Array<Chapter>;
+    chapters: Array<Chapter>;
     id: number;
 };
 
@@ -17,12 +17,12 @@ export type Chapter = {
     id: number;
     videoId: string;
     videoTranscript: string;
-    Questions: Array<Question>;
+    questions: Array<Question>;
 };
 
 export type Question = {
     question: string;
-    Options: Array<Option>;
+    options: Array<Option>;
     id: number;
 };
 

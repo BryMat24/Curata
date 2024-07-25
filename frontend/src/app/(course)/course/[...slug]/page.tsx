@@ -1,7 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import { FunctionComponent, useEffect, useState } from "react";
-import { apiClient } from "@/lib/axios";
+import { FunctionComponent } from "react";
 import CourseSidebar from "@/components/CourseSidebar";
 import MainVideoSummary from "@/components/MainVideoSummary";
 import Link from "next/link";
@@ -9,6 +8,7 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import QuizSection from "@/components/QuizSection";
 import { Unit, Course, Chapter } from "@/types/course";
 import { useFetch } from "@/hooks/useFetch";
+import { MoonLoader } from "react-spinners";
 
 interface Props {}
 
@@ -20,6 +20,7 @@ const CourseDetail: FunctionComponent<Props> = () => {
         error,
         loading,
     } = useFetch<Course>(`/course/${courseId}`);
+    console.log(course);
 
     if (!unitIndexParam || !chapterIndexParam) {
         return <>Something went wrong</>;
@@ -27,11 +28,26 @@ const CourseDetail: FunctionComponent<Props> = () => {
     const unitIndex = parseInt(unitIndexParam);
     const chapterIndex = parseInt(chapterIndexParam);
 
-    const unit = course?.Units[unitIndex];
-    const chapter = unit?.Chapters[chapterIndex];
+    const unit = course?.units[unitIndex];
+    const chapter = unit?.chapters[chapterIndex];
 
-    const nextChapter = unit?.Chapters[chapterIndex + 1];
-    const prevChapter = unit?.Chapters[chapterIndex - 1];
+    console.log(unit, chapter);
+
+    const nextChapter = unit?.chapters[chapterIndex + 1];
+    const prevChapter = unit?.chapters[chapterIndex - 1];
+
+    if (loading) {
+        return (
+            <div className="h-screen flex justify-center items-center flex-col gap-5">
+                <MoonLoader
+                    color="#000"
+                    size={60}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                />
+            </div>
+        );
+    }
 
     return (
         <>

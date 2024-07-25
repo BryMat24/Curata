@@ -9,32 +9,27 @@ import { useParams } from "next/navigation";
 import { useToast } from "@/components/ui/use-toast";
 import { useRouter } from "next/navigation";
 import { Course } from "@/types/course";
+import { useFetch } from "@/hooks/useFetch";
 
 interface Props {}
 
 const CreateSubTopicsPage: FunctionComponent<Props> = () => {
-    const [course, setCourse] = useState<Course>();
     const { toast } = useToast();
     const { courseId } = useParams();
-    const [loading, setLoading] = useState(false);
     const router = useRouter();
-
-    useEffect(() => {
-        getCourseDetail();
-    }, []);
-
-    const getCourseDetail = async () => {
-        const { data } = await apiClient.get<Course>(`/course/${courseId}`);
-        setCourse(data);
-    };
+    const {
+        data: course,
+        loading,
+        setLoading,
+    } = useFetch<Course>(`/course/${courseId}`);
 
     const generateSubTopicContent = async () => {
         try {
             setLoading(true);
             const requestBody: any = [];
-            course?.Units.forEach((unit) => {
+            course?.units.forEach((unit) => {
                 const unitName = unit.unitName;
-                unit?.Chapters.forEach((chapter) => {
+                unit?.chapters.forEach((chapter) => {
                     const chapterName = chapter.chapterName;
                     const chapterId = chapter.id;
                     requestBody.push({ unitName, chapterName, chapterId });
@@ -48,7 +43,6 @@ const CreateSubTopicsPage: FunctionComponent<Props> = () => {
             );
 
             setLoading(false);
-            // get into the course, first chapter
             router.push(`/course/${course?.id}/0/0`);
             toast({
                 title: "Success!",
@@ -77,8 +71,8 @@ const CreateSubTopicsPage: FunctionComponent<Props> = () => {
                     </p>
                 </div>
 
-                {course?.Units &&
-                    course?.Units.map((unit, index) => (
+                {course?.units &&
+                    course?.units.map((unit, index) => (
                         <div className="mt-8" key={index}>
                             <p className="text-[#767574] font-semibold">
                                 UNIT {index + 1}
@@ -87,8 +81,8 @@ const CreateSubTopicsPage: FunctionComponent<Props> = () => {
                                 {unit?.unitName}
                             </h2>
                             <div className="mt-2 flex flex-col gap-2">
-                                {unit?.Chapters &&
-                                    unit?.Chapters.map((chapter, index) => (
+                                {unit?.chapters &&
+                                    unit?.chapters.map((chapter, index) => (
                                         <div
                                             className="bg-[#F5F5F4] py-3 px-5"
                                             key={index}

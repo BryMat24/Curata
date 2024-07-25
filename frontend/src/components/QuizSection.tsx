@@ -9,7 +9,7 @@ interface QuizProps {
 }
 
 const QuizSection: FunctionComponent<QuizProps> = ({ chapter }) => {
-    const questions = chapter?.Questions;
+    const questions = chapter?.questions;
     const [selected, setSelected] = useState<{ [key: number]: number }>([]);
     const [questionState, setQuestionState] = useState<{
         [key: number]: boolean;
@@ -18,7 +18,7 @@ const QuizSection: FunctionComponent<QuizProps> = ({ chapter }) => {
     const answerKey = useMemo(() => {
         const answer: { [key: number]: number } = {};
         questions?.forEach((question, index) => {
-            answer[index] = question.Options.findIndex(
+            answer[index] = question.options.findIndex(
                 (el) => el.status === true
             );
         });
@@ -65,7 +65,7 @@ const QuizSection: FunctionComponent<QuizProps> = ({ chapter }) => {
                                 handleOnChange(index, value)
                             }
                         >
-                            {question?.Options?.map((option, index) => (
+                            {question?.options?.map((option, index) => (
                                 <div
                                     key={index}
                                     className="flex space-x-2 mt-1"

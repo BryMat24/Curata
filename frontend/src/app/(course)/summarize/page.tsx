@@ -66,10 +66,10 @@ const Summarize: FunctionComponent<Props> = () => {
     }
 
     const chapter = {
-        Questions: question
+        questions: question
             ? Object.entries(question).map(([question, options]) => ({
                   question,
-                  Options: options.map(({ option, status }) => ({
+                  options: options.map(({ option, status }) => ({
                       option,
                       status,
                   })),
@@ -77,6 +77,7 @@ const Summarize: FunctionComponent<Props> = () => {
             : [],
     };
 
+    console.log(summary);
     return summary && question ? (
         <div className="pt-[120px] px-[50px] pb-[50px] flex">
             <div
