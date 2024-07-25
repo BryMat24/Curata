@@ -4,9 +4,6 @@ declare module "youtube-transcript" {
     }
 
     export class YoutubeTranscript {
-        static fetchTranscript(
-            videoId: string,
-            { lang: string, country: string }
-        ): Promise<Transcript[]>;
+        static fetchTranscript(videoId: string): Promise<Transcript[]>;
     }
 }

@@ -9,11 +9,6 @@ declare global {
             openai: OpenAI;
             pc: Pinecone;
             userId?: number;
-            files?: {
-                file: {
-                    data: Buffer;
-                };
-            };
         }
     }
 }

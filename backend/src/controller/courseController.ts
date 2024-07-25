@@ -144,10 +144,7 @@ class CourseController {
             const { videoId } = videoResult.items[0].id;
 
             const transcript = (
-                await YoutubeTranscript.fetchTranscript(videoId, {
-                    lang: "en",
-                    country: "EN",
-                })
+                await YoutubeTranscript.fetchTranscript(videoId)
             )
                 .map((t) => t.text)
                 .join(" ")
@@ -181,87 +178,90 @@ class CourseController {
                 },
             });
 
-            // generate questions
+            const questionPromises = [];
             for (let i = 0; i < 5; i++) {
-                const options = [];
-                let visitedQuestions = "";
-
-                const question = await openai.chat.completions.create({
-                    messages: [
-                        {
-                            role: "user",
-                            content: `You are to generate a conceptual question regarding main topic of ${courseName} focusing on subtopic of ${title}. Give only one question that doesn't exist yet in ${visitedQuestions}`,
-                        },
-                    ],
-                    model: "gpt-3.5-turbo",
-                });
-
-                const generatedQuestion = question.choices[0]?.message.content;
-                visitedQuestions += `${generatedQuestion}, `;
-
-                // insert to db question
-                const addedQuestion = await prisma.question.create({
-                    data: {
-                        chapterId: chapterId,
-                        question: generatedQuestion as string,
-                    },
-                });
-
-                const answer = await openai.chat.completions.create({
-                    messages: [
-                        {
-                            role: "user",
-                            content: `In below 10 words, give me the answer to the question: ${generatedQuestion} without any precursor or additional words.`,
-                        },
-                    ],
-                    model: "gpt-3.5-turbo",
-                });
-
-                const generatedAnswer = answer.choices[0]?.message
-                    .content as string;
-                options.push({
-                    option: generatedAnswer,
-                    status: true,
-                    questionId: addedQuestion.id,
-                });
-
-                const wrongOptionsPromise = [];
-                for (let i = 0; i < 3; i++) {
-                    const promise = openai.chat.completions.create({
+                questionPromises.push(async () => {
+                    const options = [];
+                    const question = await openai.chat.completions.create({
                         messages: [
                             {
                                 role: "user",
-                                content:
-                                    `In below 10 words, give me a wrong answer to the question: ${generatedQuestion} without any precursor or additional words.` +
-                                    "Make sure that the generated wrong answer is still related to the question.",
+                                content: `You are to generate a conceptual question regarding main topic of ${courseName} focusing on subtopic of ${title}. Give only one question.`,
                             },
                         ],
-                        model: "gpt-3.5-turbo-0125",
+                        model: "gpt-3.5-turbo",
                     });
 
-                    wrongOptionsPromise.push(promise);
-                }
+                    const generatedQuestion =
+                        question.choices[0]?.message.content;
 
-                const results = await Promise.all(wrongOptionsPromise);
-                results.forEach((result) => {
-                    result.choices.forEach((choice) => {
-                        options.push({
-                            option: choice.message.content,
-                            status: false,
-                            questionId: addedQuestion.id,
+                    // insert to db question
+                    const addedQuestion = await prisma.question.create({
+                        data: {
+                            chapterId: chapterId,
+                            question: generatedQuestion as string,
+                        },
+                    });
+
+                    const answer = await openai.chat.completions.create({
+                        messages: [
+                            {
+                                role: "user",
+                                content: `In below 10 words, give me the answer to the question: ${generatedQuestion} without any precursor or additional words.`,
+                            },
+                        ],
+                        model: "gpt-3.5-turbo",
+                    });
+
+                    const generatedAnswer = answer.choices[0]?.message
+                        .content as string;
+
+                    options.push({
+                        option: generatedAnswer,
+                        status: true,
+                        questionId: addedQuestion.id,
+                    });
+
+                    const wrongOptionsPromises = [];
+                    for (let i = 0; i < 3; i++) {
+                        const promise = openai.chat.completions.create({
+                            messages: [
+                                {
+                                    role: "user",
+                                    content:
+                                        `In below 10 words, give me a wrong answer to the question: ${generatedQuestion} without any precursor or additional words.` +
+                                        `Make sure that it is related to the ${generatedQuestion} which must be in the scope of chapter ${chapterName} in ${courseName}`,
+                                },
+                            ],
+                            model: "gpt-3.5-turbo-0125",
+                        });
+
+                        wrongOptionsPromises.push(promise);
+                    }
+
+                    const results = await Promise.all(wrongOptionsPromises);
+                    results.forEach((result) => {
+                        result.choices.forEach((choice) => {
+                            options.push({
+                                option: choice.message.content,
+                                status: false,
+                                questionId: addedQuestion.id,
+                            });
                         });
                     });
-                });
 
-                await prisma.option.createMany({
-                    data: options,
+                    await prisma.option.createMany({
+                        data: options,
+                    });
                 });
             }
 
+            await Promise.all(questionPromises.map((fn) => fn()));
             res.status(200).json({
                 message: "Course video generated successfully",
             });
         } catch (err) {
+            console.log(err);
             next(err);
         }
     }
