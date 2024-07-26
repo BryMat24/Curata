@@ -43,7 +43,7 @@ class CourseController {
             });
 
             // unsplash
-            const { data: unsplashImage } = await axios(
+            const { data: unsplashImage } = await axios.get(
                 `https://api.unsplash.com/search/photos?page=1&query=${imageSearchTerm?.choices[0]?.message.content}&client_id=${process.env.UNSPLASH_API_KEY}`
             );
 
@@ -261,7 +261,6 @@ class CourseController {
                 message: "Course video generated successfully",
             });
         } catch (err) {
-            console.log(err);
             next(err);
         }
     }
@@ -288,6 +287,7 @@ class CourseController {
                     },
                 },
             });
+            console.log(course);
             res.status(200).json(course);
         } catch (err) {
             next(err);

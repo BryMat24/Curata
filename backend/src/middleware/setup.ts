@@ -7,6 +7,8 @@ const setupAPIKey: RequestHandler = (req, res, next) => {
         apiKey: process.env.OPENAI_API_KEY as string,
     });
 
+    console.log(req.openai);
+
     req.pc = new Pinecone({
         apiKey: process.env.PINECONE_API_KEY as string,
     });

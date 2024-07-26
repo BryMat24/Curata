@@ -17,6 +17,10 @@ app.use(setupAPIKey);
 app.use(router);
 app.use(errorHandler);
 
-app.listen(PORT, () => {
-    console.log(`listening to port ${PORT}`);
-});
+if (process.env.NODE_ENV !== "test") {
+    app.listen(PORT, () => {
+        console.log(`listening to port ${PORT}`);
+    });
+}
+
+export default app;

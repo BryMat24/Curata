@@ -46,7 +46,6 @@ class SummararyController {
                     ]);
                 });
             }
-            console.log(promises);
 
             await Promise.all(promises.map((fn) => fn()));
             res.status(200).json({ message: "success" });
