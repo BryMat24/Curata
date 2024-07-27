@@ -17,13 +17,30 @@ export default function Home() {
             } dark:bg-black`}
         >
             <div className="min-h-screen flex flex-col items-center justify-center gap-5">
-                <h1 className="text-5xl font-bold">Curata 🤖.</h1>
+                <h1 className="text-5xl font-bold">Introducing Curata...</h1>
                 <p className="text-2xl">
                     Your all-in-one AI Study Assistant curated to elevate your
                     learning experience
                 </p>
                 <Link href="/course">
-                    <Button>Get Started</Button>
+                    <Button>
+                        Try Curata{" "}
+                        <svg
+                            width="0.625rem"
+                            viewBox="0 0 10 10"
+                            fill="none"
+                            xmlns="http://www.w3.org/2000/svg"
+                            className="ml-1"
+                        >
+                            <path
+                                d="M1 9L9 1M9 1H2.5M9 1V7.22222"
+                                stroke="currentColor"
+                                stroke-width="1.25"
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                            ></path>
+                        </svg>
+                    </Button>
                 </Link>
             </div>
             <div className="h-screen p-12">
@@ -100,9 +117,10 @@ export default function Home() {
                                     Subject Coverage:
                                 </span>{" "}
                                 Curata may not cover all possible subjects
-                                comprehensively. The AI's knowledge is limited
-                                to the data it has been trained on, which may
-                                not include every niche or emerging field.
+                                comprehensively. The AI&apos;s knowledge is
+                                limited to the data it has been trained on,
+                                which may not include every niche or emerging
+                                field.
                             </li>
                             <li className="list-disc">
                                 <span className="font-bold">
@@ -111,9 +129,9 @@ export default function Home() {
                                 While summaries and quizzes can provide a good
                                 overview, they might not cover every detail or
                                 nuance of the original material. For complex
-                                subjects, it's recommended to use Curata as a
-                                supplementary tool alongside more in-depth study
-                                resources.
+                                subjects, it&apos;s recommended to use Curata as
+                                a supplementary tool alongside more in-depth
+                                study resources..
                             </li>
                             <li className="list-disc">
                                 <span className="font-bold">
@@ -121,8 +139,8 @@ export default function Home() {
                                 </span>{" "}
                                 The AI may occasionally produce summaries or
                                 quiz questions that are inaccurate or lack
-                                context. It's important to cross-reference the
-                                generated content with trusted sources.
+                                context. It&apos;s important to cross-reference
+                                the generated content with trusted sources.
                             </li>
                             <li className="list-disc">
                                 <span className="font-bold">
