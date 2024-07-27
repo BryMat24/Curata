@@ -5,7 +5,7 @@ import errorHandler from "./middleware/errorHandler";
 import setupAPIKey from "./middleware/setup";
 
 const app = express();
-const PORT = 3002;
+const PORT = process.env.PORT || 3002;
 
 require("dotenv").config();
 
