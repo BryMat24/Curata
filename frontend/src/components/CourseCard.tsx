@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { FunctionComponent } from "react";
+import Image from "next/image";
 
 interface Props {
     courseImage: string;
@@ -22,10 +23,12 @@ const CourseCard: FunctionComponent<Props> = ({
                 <CardTitle className="text-md">{courseName}</CardTitle>
             </CardHeader>
             <CardContent>
-                <img
+                <Image
                     src={courseImage}
                     alt="course image"
-                    className="h-[260px] w-[250px] rounded-md"
+                    className="rounded-md h-[260px] w-[250px]"
+                    height={260}
+                    width={250}
                 />
             </CardContent>
             <CardContent className="text-center">

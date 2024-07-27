@@ -5,6 +5,7 @@ import { Sun, Github, Moon } from "lucide-react";
 import { useContext } from "react";
 import { ThemeContext } from "@/context/themeContext";
 import Link from "next/link";
+import Image from "next/image";
 
 export const Navbar = () => {
     const { theme, toggleTheme } = useContext(ThemeContext);
@@ -15,11 +16,11 @@ export const Navbar = () => {
     return (
         <div className="absolute left-0 right-0 flex justify-between p-5">
             <div>
-                <img
+                <Image
                     alt="favicon"
                     loading="lazy"
-                    width="40"
-                    height="40"
+                    width={40}
+                    height={40}
                     decoding="async"
                     data-nimg="1"
                     className="dark:invert"
