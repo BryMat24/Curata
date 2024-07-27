@@ -1,0 +1,58 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Course {
+  id          Int    @id @default(autoincrement())
+  courseName  String
+  courseImage String
+  units       Unit[]
+}
+
+model Unit {
+  id       Int       @id @default(autoincrement())
+  unitName String
+  courseId Int
+  course   Course    @relation(fields: [courseId], references: [id])
+  chapters Chapter[]
+}
+
+model Option {
+  id         Int      @id @default(autoincrement())
+  option     String
+  status     Boolean
+  questionId Int
+  questions  Question @relation(fields: [questionId], references: [id])
+}
+
+model Question {
+  id        Int      @id @default(autoincrement())
+  question  String
+  options   Option[]
+  chapterId Int
+  chapter   Chapter  @relation(fields: [chapterId], references: [id])
+}
+
+model Chapter {
+  id              Int        @id @default(autoincrement())
+  chapterName     String
+  unitId          Int
+  unit            Unit       @relation(fields: [unitId], references: [id])
+  videoId         String?
+  videoTranscript String?
+  videoTitle      String?
+  videoThumbnail  String?
+  questions       Question[]
+}

@@ -17,7 +17,7 @@ const CourseCard: FunctionComponent<Props> = ({
     courseUnits,
 }) => {
     return (
-        <Card className="w-[300px] h-[500px] duration-500 ease-in hover:scale-[1.03] hover:border hover:border-primary cursor-pointer shadow-md">
+        <Card className="w-[300px] h-[500px] duration-500 ease-in hover:scale-[1.03] hover:border hover:border-primary cursor-pointer shadow-md dark:bg-dark-blue">
             <CardHeader>
                 <CardTitle className="text-md">{courseName}</CardTitle>
             </CardHeader>

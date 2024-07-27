@@ -1,0 +1,5 @@
+-- AlterTable
+ALTER TABLE "Chapter" ALTER COLUMN "videoId" DROP NOT NULL,
+ALTER COLUMN "videoTranscript" DROP NOT NULL,
+ALTER COLUMN "videoTitle" DROP NOT NULL,
+ALTER COLUMN "videoThumbnail" DROP NOT NULL;
