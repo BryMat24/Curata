@@ -6,8 +6,12 @@ A Generative AI (GenAI) Course Builder and Summariser that allows students to cu
 
 ## Application Overview
 
--   **Front-End:** Next.js, Tailwind CSS
--   **Back-End:** Express.js, Sequelize
+-   **Front-End:** Next.ts, Tailwind CSS
+-   **Back-End:** Express.ts, PrismaORM
 -   **Data:** PostgreSQL, PineconeDB
 
 ![Example Image](./architecture.png)
+
+## Application Architecture
+
+![Example Image](./aws.png)
