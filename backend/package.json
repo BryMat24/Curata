@@ -5,7 +5,6 @@
     "scripts": {
         "test": "jest",
         "build": "npx tsc && cp ./src/prisma/schema.prisma dist/src/prisma/schema.prisma && npx prisma generate --schema dist/src/prisma/schema.prisma",
-        "start": "pm2 start dist/src/app.js",
         "dev": "nodemon"
     },
     "keywords": [],
